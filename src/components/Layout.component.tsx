@@ -1,7 +1,13 @@
 import React from "react";
 import { Link, Outlet } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import type { RootState } from "../store/store";
+import { agregarA, agregarB, reiniciar } from "../components/Redux";
 
 export default function Layout() {
+  const palabra = useSelector((state: RootState) => state.palabra.value);
+  const dispatch = useDispatch();
+
   return (
     <>
       <header>
@@ -22,7 +28,11 @@ export default function Layout() {
           </ul>
         </nav>
       </header>
+      <button onClick={()=>{dispatch(agregarA())}}>Agregar A</button>
+      <button onClick={()=>{dispatch(agregarB())}}>Agregar B</button>
+      <button onClick={()=>{dispatch(reiniciar())}}>Reiniciar</button>
 
+      {palabra}
       <Outlet />
     </>
   );
